@@ -1,20 +1,36 @@
 import React, { useState, useEffect } from "react";
 
-const EditCustomerModal = ({ isOpen, onClose, customer }) => {
+const EditCustomerModal = ({ isOpen, onClose, customer, onSave }) => {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
+  const [value, setValue] = useState("");
+  const [date, setDate] = useState("");
+  const [status, setStatus] = useState("New");
 
   useEffect(() => {
     if (customer) {
-      setName(customer.name);
-      setCompany(customer.company);
+      setName(customer.name || "");
+      setCompany(customer.company || "");
+      setValue(customer.value?.replace("$", "") || "");
+      setDate(customer.date || "");
+      setStatus(customer.status || "New");
     }
   }, [customer]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // xử lý logic update customer ở đây
-    console.log("Updated:", { name, company });
+    if (!name || !company || !value || !date || !status) return;
+
+    const updatedCustomer = {
+      ...customer,
+      name,
+      company,
+      value: `$${value}`,
+      date,
+      status,
+    };
+
+    onSave(updatedCustomer);
     onClose();
   };
 
@@ -39,6 +55,28 @@ const EditCustomerModal = ({ isOpen, onClose, customer }) => {
             value={company}
             onChange={(e) => setCompany(e.target.value)}
           />
+          <input
+            type="number"
+            className="w-full px-3 py-2 border rounded"
+            placeholder="Order Value"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <input
+            type="date"
+            className="w-full px-3 py-2 border rounded"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          <select
+            className="w-full px-3 py-2 border rounded"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
+            <option value="New">New</option>
+            <option value="In-progress">In-progress</option>
+            <option value="Completed">Completed</option>
+          </select>
           <div className="flex justify-end gap-2 pt-2">
             <button
               type="button"

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar.jsx";
 import EditCustomerModal from "./EditCustomerModal";
+import AddCustomerModal from "./AddCustomerModal";
 
 const initialCustomers = [
   {
@@ -63,6 +64,11 @@ const DashboardLayout = () => {
   const [customers, setCustomers] = useState(initialCustomers);
   const [editingCustomer, setEditingCustomer] = useState(null);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [isAddModalOpen, setAddModalOpen] = useState(false);
+
+  const handleAddCustomer = (newCustomer) => {
+    setCustomers((prev) => [...prev, newCustomer]);
+  };
 
   const handleEditClick = (customer) => {
     setEditingCustomer(customer);
@@ -134,6 +140,12 @@ const DashboardLayout = () => {
                 <h2 className="text-lg font-semibold">Detailed report</h2>
               </div>
               <div className="space-x-2">
+                <button
+                  className="bg-pink-500 text-white px-4 py-1 rounded-md hover:bg-pink-600 text-sm"
+                  onClick={() => setAddModalOpen(true)}
+                >
+                  ➕ Add Customer
+                </button>
                 <button className="border border-pink-500 text-pink-500 px-4 py-1 rounded-md hover:bg-pink-50 text-sm">
                   ⬇ Import
                 </button>
@@ -204,6 +216,12 @@ const DashboardLayout = () => {
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
         onSave={handleSave}
+      />
+
+      <AddCustomerModal
+        isOpen={isAddModalOpen}
+        onClose={() => setAddModalOpen(false)}
+        onAdd={handleAddCustomer}
       />
     </div>
   );
