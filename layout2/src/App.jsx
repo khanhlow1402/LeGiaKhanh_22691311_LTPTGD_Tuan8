@@ -1,11 +1,12 @@
 import React from "react";
-import Header from "./components/Header"; // Đường dẫn tùy cấu trúc dự án của bạn
+import Header from "./components/Header";
+import HeroSection from "./components/HeroSection";
 
 function App() {
   return (
     <div>
       <Header />
-      {/* Nội dung khác ở đây */}
+      <HeroSection />
     </div>
   );
 }
