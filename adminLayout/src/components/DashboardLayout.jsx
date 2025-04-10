@@ -109,9 +109,156 @@ const DashboardLayout = () => {
           </div>
 
           {/* Table - phần dưới cùng bên phải */}
+          {/* Table - phần dưới cùng bên phải */}
           <div className="bg-white rounded-lg shadow p-4">
-            <h2 className="text-lg font-semibold mb-4">Detailed report</h2>
-            {/* Nội dung bảng sẽ được thêm sau */}
+            <div className="flex justify-between items-center mb-4">
+              <div className="flex items-center space-x-2">
+                <span className="text-pink-600 text-xl">🗂️</span>
+                <h2 className="text-lg font-semibold">Detailed report</h2>
+              </div>
+              <div className="space-x-2">
+                <button className="border border-pink-500 text-pink-500 px-4 py-1 rounded-md hover:bg-pink-50 text-sm">
+                  ⬇ Import
+                </button>
+                <button className="border border-pink-500 text-pink-500 px-4 py-1 rounded-md hover:bg-pink-50 text-sm">
+                  ⬆ Export
+                </button>
+              </div>
+            </div>
+
+            {/* Table */}
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-sm text-left text-gray-700">
+                <thead className="bg-gray-50 font-semibold">
+                  <tr>
+                    <th className="px-4 py-3">
+                      <input type="checkbox" />
+                    </th>
+                    <th className="px-4 py-3">Customer Name</th>
+                    <th className="px-4 py-3">Company</th>
+                    <th className="px-4 py-3">Order Value</th>
+                    <th className="px-4 py-3">Order Date</th>
+                    <th className="px-4 py-3">Status</th>
+                    <th className="px-4 py-3 text-right">Edit</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {[
+                    {
+                      name: "Elizabeth Lee",
+                      avatar: "https://i.pravatar.cc/40?img=1",
+                      company: "AvatarSystems",
+                      value: "$359",
+                      date: "10/07/2023",
+                      status: "New",
+                    },
+                    {
+                      name: "Carlos Garcia",
+                      avatar: "https://i.pravatar.cc/40?img=2",
+                      company: "SmoozeShift",
+                      value: "$747",
+                      date: "24/07/2023",
+                      status: "New",
+                    },
+                    {
+                      name: "Elizabeth Bailey",
+                      avatar: "https://i.pravatar.cc/40?img=3",
+                      company: "Prime Time Telecom",
+                      value: "$564",
+                      date: "08/08/2023",
+                      status: "In-progress",
+                    },
+                    {
+                      name: "Ryan Brown",
+                      avatar: "https://i.pravatar.cc/40?img=4",
+                      company: "OmniTech Corporation",
+                      value: "$541",
+                      date: "31/08/2023",
+                      status: "In-progress",
+                    },
+                    {
+                      name: "Ryan Young",
+                      avatar: "https://i.pravatar.cc/40?img=5",
+                      company: "DataStream Inc.",
+                      value: "$769",
+                      date: "01/05/2023",
+                      status: "Completed",
+                    },
+                    {
+                      name: "Hailey Adams",
+                      avatar: "https://i.pravatar.cc/40?img=6",
+                      company: "FlowRush",
+                      value: "$922",
+                      date: "10/06/2023",
+                      status: "Completed",
+                    },
+                  ].map((row, idx) => (
+                    <tr key={idx} className="hover:bg-gray-50">
+                      <td className="px-4 py-3">
+                        <input type="checkbox" />
+                      </td>
+                      <td className="px-4 py-3 flex items-center space-x-2">
+                        <img
+                          src={row.avatar}
+                          alt=""
+                          className="w-8 h-8 rounded-full"
+                        />
+                        <span className="font-medium">{row.name}</span>
+                      </td>
+                      <td className="px-4 py-3">{row.company}</td>
+                      <td className="px-4 py-3">{row.value}</td>
+                      <td className="px-4 py-3">{row.date}</td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`
+                px-2 py-1 text-xs rounded-full font-medium
+                ${row.status === "New" ? "bg-blue-100 text-blue-600" : ""}
+                ${
+                  row.status === "In-progress"
+                    ? "bg-yellow-100 text-yellow-700"
+                    : ""
+                }
+                ${
+                  row.status === "Completed"
+                    ? "bg-green-100 text-green-600"
+                    : ""
+                }
+              `}
+                        >
+                          {row.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-right">✏️</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Footer */}
+            <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
+              <span>63 results</span>
+              <div className="flex items-center space-x-2">
+                <button className="px-2 py-1 rounded hover:bg-gray-200">
+                  &lt;
+                </button>
+                {[1, 2, 3, 4, "...", 10, 11].map((page, i) => (
+                  <button
+                    key={i}
+                    className={`px-3 py-1 rounded-full ${
+                      page === 1
+                        ? "bg-pink-500 text-white"
+                        : "hover:bg-gray-200"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button className="px-2 py-1 rounded hover:bg-gray-200">
+                  &gt;
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
