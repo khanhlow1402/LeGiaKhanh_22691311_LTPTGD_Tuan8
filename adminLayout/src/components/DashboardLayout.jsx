@@ -1,4 +1,5 @@
 import React from "react";
+import Sidebar from "./Sidebar.jsx";
 
 const DashboardLayout = () => {
   return (
@@ -8,8 +9,12 @@ const DashboardLayout = () => {
         {/* Phần bên trái (left) - chiếm 3 cột */}
         <div className="col-span-3 bg-white rounded-lg shadow p-4">
           <div className="h-full">
-            {/* Nội dung phần left sẽ được thêm sau */}
-            <p className="text-gray-500">Left sidebar content</p>
+            <div className="flex">
+              <Sidebar />
+              <main className="flex-1 bg-gray-50 p-4">
+                {/* nội dung ở đây */}
+              </main>
+            </div>
           </div>
         </div>
 
